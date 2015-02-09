@@ -1,0 +1,16 @@
+Promise.race = function(values){
+      return new Promise(function(resolve, reject){
+        var over = 0;
+        for (var i = 0, len = values.length; i < len && !over; ++i){
+          var val = values[i];
+          if (val && typeof val.then === 'function'){
+            val.then(function(res){
+              !over++ && resolve(res);
+            }, reject);
+          }
+          else{
+            !over++ && resolve(val);
+          }
+        }
+      });
+    };

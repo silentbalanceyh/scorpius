@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2009-09-14T14:55:24</date>
+  <millis>1252911324403</millis>
+  <sequence>0</sequence>
+  <logger>com.sco._2nd.oo.logging.LoggingManager</logger>
+  <level>INFO</level>
+  <class>com.sco._2nd.oo.logging.LoggingManager</class>
+  <method>main</method>
+  <thread>10</thread>
+  <message>test 1</message>
+</record>
+<record>
+  <date>2009-09-14T14:55:24</date>
+  <millis>1252911324416</millis>
+  <sequence>1</sequence>
+  <logger>com.sco._2nd.oo.logging.LoggingManager</logger>
+  <level>INFO</level>
+  <class>com.sco._2nd.oo.logging.LoggingManager</class>
+  <method>main</method>
+  <thread>10</thread>
+  <message>test 2</message>
+</record>
+<record>
+  <date>2009-09-14T14:55:24</date>
+  <millis>1252911324417</millis>
+  <sequence>2</sequence>
+  <logger>com.sco._2nd.oo.logging.LoggingManager</logger>
+  <level>INFO</level>
+  <class>com.sco._2nd.oo.logging.LoggingManager</class>
+  <method>main</method>
+  <thread>10</thread>
+  <message>test 3</message>
+</record>
+</log>
