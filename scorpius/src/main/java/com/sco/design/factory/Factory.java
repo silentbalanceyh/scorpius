@@ -1,6 +1,7 @@
 package com.sco.design.factory;
 
 public class Factory {
+	@SuppressWarnings("unused")
 	public static void main(String args[]){
 		I a = F.get(1);
 		I b = F.get(2);
