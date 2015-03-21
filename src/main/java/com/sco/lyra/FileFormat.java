@@ -24,8 +24,9 @@ public class FileFormat {
 			String line = reader.readLine();
 			while (null != line) {
 				// Ignore line comments;
-				int space = getSpace(line);
-				content.append(getLine(line,space) + "\n");
+				// int space = getSpace(line);
+				content.append("\t" + line + "\n");
+				// content.append(getLine(line,space) + "\n");
 				line = reader.readLine();
 			}
 		} catch (IOException ex) {
@@ -34,6 +35,7 @@ public class FileFormat {
 		System.out.println(content);
 	}
 
+	@SuppressWarnings("unused")
 	private static String getLine(final String line, final int space) {
 		System.out.println(space + ":" + line);
 		StringBuilder retLine = new StringBuilder();
@@ -70,6 +72,7 @@ public class FileFormat {
 		return retLine.toString();
 	}
 
+	@SuppressWarnings("unused")
 	private static int getSpace(final String line) {
 		int i = 0;
 		char space = '$';

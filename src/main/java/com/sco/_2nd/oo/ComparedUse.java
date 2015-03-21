@@ -36,21 +36,25 @@ public class ComparedUse {
 		String str2 = new String("Str");
 		System.out.println("JVM equals : " + str1.equals(str2));
 		System.out.println("JVM == : " + (str1 == str2));
+		System.out.println();
 		// JVM ==
 		String str3 = new String("Str");
 		String str4 = str3;
 		System.out.println("JVM equals : " + (str3.equals(str4)));
 		System.out.println("JVM == :" + (str3 == str4));
+		System.out.println();
 		
 		// Defined equals
 		User user1 = new User();
 		User user2 = new User();
 		System.out.println("Defined equals : " + user1.equals(user2));
 		System.out.println("Defined == : " + (user1 == user2));
+		System.out.println();
 		// Defined ==
 		User user3 = new User();
 		User user4 = user3;
 		System.out.println("Defined equals : " + user3.equals(user4));
 		System.out.println("Defined == : " + (user3 == user4));
+		System.out.println();
 	}
 }
