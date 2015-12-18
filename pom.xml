@@ -13,21 +13,70 @@
 		<slf4j.version>1.5.10</slf4j.version>
 		<!-- Encoding method: UTF-8 -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		
 		<!-- Dependency library -->
 		<junit.version>4.11</junit.version>
 		<jmock.version>2.5.1</jmock.version>
 		<!-- Java version -->
 		<jdk.version>1.8</jdk.version>
+		<ajc.version>1.8</ajc.version>
+		<!-- Object validation -->
+        <oval.version>1.84</oval.version>
+        <oval.groovy>2.1.6</oval.groovy>
+		<!-- AspectJ Version -->
+        <aspectj.version>1.8.7</aspectj.version>
+        <aopalliance.version>1.0</aopalliance.version>
+        <aspectj.compile.file>aopaj.properties</aspectj.compile.file>
+        <aspectj.test.file>aopaj-test.properties</aspectj.test.file>
 		<!-- Maven compiler plugin version -->
 		<maven.compiler.plugin.version>3.1</maven.compiler.plugin.version>
 		<maven.resources.plugin.version>2.6</maven.resources.plugin.version>
+		<!-- 【Latest】AspectJ Compiler -->
+        <maven.mojo.aspectj.version>1.7</maven.mojo.aspectj.version>
+        <!-- MSSQL -->
+        <jdbc.mssql.version>4.1</jdbc.mssql.version>
 	</properties>
 	<dependencies>
+	    <!-- Object Validation -->
+        <dependency>
+            <groupId>net.sf.oval</groupId>
+            <artifactId>oval</artifactId>
+            <version>${oval.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-all</artifactId>
+            <version>${oval.groovy}</version>
+        </dependency>
+        <!-- AspectJ Runtime -->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjtools</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>aopalliance</groupId>
+            <artifactId>aopalliance</artifactId>
+            <version>${aopalliance.version}</version>
+        </dependency>
 		<dependency>
 			<groupId>org.jmock</groupId>
 			<artifactId>jmock-junit4</artifactId>
 			<version>${jmock.version}</version>
 		</dependency>
+		<!-- MSSQL -->
+		<dependency>
+            <groupId>com.microsoft.sqlserver</groupId>
+            <artifactId>sqljdbc41</artifactId>
+            <version>${jdbc.mssql.version}</version>
+        </dependency>
 		<!-- Slf4j -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -46,6 +95,26 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+	<dependencyManagement>
+        <dependencies>
+            <!-- AspectJ Runtime -->
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjrt</artifactId>
+                <version>${aspectj.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjtools</artifactId>
+                <version>${aspectj.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjweaver</artifactId>
+                <version>${aspectj.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 	<build>
 		<plugins>
 			<!-- Other plugins required by the build -->
@@ -58,6 +127,60 @@
 					<target>${jdk.version}</target>
 				</configuration>
 			</plugin>
+			<!-- AJDT Compile -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>aspectj-maven-plugin</artifactId>
+                <version>${maven.mojo.aspectj.version}</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjrt</artifactId>
+                        <version>${aspectj.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjtools</artifactId>
+                        <version>${aspectj.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>com.sun</groupId>
+                        <artifactId>tools</artifactId>
+                        <version>${jdk.version}</version>
+                        <scope>runtime</scope>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <complianceLevel>${ajc.version}</complianceLevel>
+                    <source>${ajc.version}</source>
+                    <target>${ajc.version}</target>
+                    <!-- 除开Util-Comet以外，其他项目必须包含此片段，主要用于适配.aj文件来启动OVal的防御式编程 -->
+                    <!-- Begin -->
+                    <!-- 暂时忽略警告信息，目前存在一个Xlint:typeNotExposedToWeaver的问题 -->
+                    <Xlint>ignore</Xlint>
+                    <!-- End -->
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>compile</id>
+                        <configuration>
+                            <ajdtBuildDefFile>src/main/resources/aop/${aspectj.compile.file}</ajdtBuildDefFile>
+                        </configuration>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>test-compile</id>
+                        <configuration>
+                            <ajdtBuildDefFile>src/main/resources/aop/${aspectj.test.file}</ajdtBuildDefFile>
+                        </configuration>
+                        <goals>
+                            <goal>test-compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 		</plugins>
 		<resources>
 			<resource>

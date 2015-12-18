@@ -1,0 +1,209 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link type="text/css" rel="stylesheet"
+	href="/static/bootstrap/css/bootstrap.min.css">
+<link type="text/css" rel="stylesheet"
+	href="/static/bootstrap/css/bootstrap-responsive.min.css">
+<link type="text/css" rel="stylesheet" href="/static/assets/styles.css">
+<link type="text/css" rel="stylesheet"
+	href="/static/assets/DT_bootstrap.css">
+<link type="text/css" rel="stylesheet"
+	href="/static/resources/css/typography.css">
+<link type="text/css" rel="stylesheet"
+	href="/static/resources/css/bootstrap-dialog.min.css">
+<link type="text/css" rel="stylesheet"
+	href="/static/vendors/easypiechart/jquery.easy-pie-chart.css">
+<script type="text/javascript"
+	src="/static/vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+<script type="text/javascript" src="/static/vendors/jquery-1.9.1.min.js"></script>
+<script type="text/javascript"
+	src="/static/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript"
+	src="/static/vendors/datatables/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript"
+	src="/static/vendors/easypiechart/jquery.easy-pie-chart.js"></script>
+<script type="text/javascript" src="/static/assets/scripts.js"></script>
+<script type="text/javascript" src="/static/assets/DT_bootstrap.js"></script>
+<script type="text/javascript"
+	src="/static/resources/js/bootstrap-dialog.min.js"></script>
+<script type="text/javascript"
+	src="/static/resources/js/cryptojs/components/core-min.js"></script>
+<script type="text/javascript"
+	src="/static/resources/js/cryptojs/components/enc-utf16-min.js"></script>
+<script type="text/javascript"
+	src="/static/resources/js/cryptojs/components/enc-base64-min.js"></script>
+<script type="text/javascript" src="/static/resources/js/message.js"></script>
+<script type="text/javascript" src="/static/resources/js/utils.js"></script>
+<script type="text/javascript" src="/static/resources/js/engine.js"></script>
+</head>
+<body screen_capture_injected="true"></body>
+<div class="navbar navbar-fixed-top">
+	<div class="navbar-inner">
+		<div class="container-fluid">
+			<a data-toggle="collapse" data-target=".nav-collapse"
+				class="btn btn-navbar"><span class="icon-bar"></span><span
+				class="icon-bar"></span><span class="icon-bar"></span></a><a href="#"
+				class="brand">Prayer Admin Management</a>
+			<div class="nav-collapse collapse">
+				<ul class="nav pull-right">
+					<li class="dropdown"><a data-toggle="dropdown" role="button"
+						href="#" class="dropdown-toggle"><i class="icon-user"></i><span>&nbsp;Lang&nbsp;</span><i
+							class="caret"></i></a>
+					<ul class="dropdown-menu">
+							<li><a href="/dynamic/admin/profile" tabindex="-1"> <i
+									id="mProfile" class="icon-ok topSubIcon hidden"></i><span>&nbsp;&nbsp;Profile</span></a></li>
+							<li class="divider"></li>
+							<li><a id="lnkLogout" href="#" tabindex="-1"
+								onclick="exeLogout();"> <i class="icon-ok hidden"></i><span>&nbsp;&nbsp;Logout</span></a></li>
+						</ul></li>
+				</ul>
+				<ul class="nav">
+					<li class="topNav"><a href="#">Dashboard</a></li>
+					<li id="mOptions" class="topNav dropdown"><a
+						data-toggle="dropdown" role="button" href="#"
+						class="dropdown-toggle"><span>&nbsp;System
+								Options&nbsp;</span><b class="caret"></b></a>
+					<ul class="dropdown-menu">
+							<li><a href="/dynamic/admin/options/h2"> <i id="mH2"
+									class="icon-ok topSubIcon hidden"></i><span>&nbsp;&nbsp;H2
+										Database Options</span></a></li>
+							<li><a href="/dynamic/admin/options/server"> <i
+									id="mServer" class="icon-ok topSubIcon hidden"></i><span>&nbsp;&nbsp;Http
+										Server Options</span></a></li>
+							<li><a href="/dynamic/admin/options/vertx"><i
+									id="mVertx" class="icon-ok topSubIcon hidden"></i><span>&nbsp;&nbsp;Vert.X
+										Options</span></a></li>
+							<li class="divider"></li>
+							<li><a href="/dynamic/admin/options/security"> <i
+									id="mSecurity" class="icon-ok topSubIcon hidden"></i><span>&nbsp;&nbsp;Security
+										Options</span></a></li>
+						</ul></li>
+					<li class="topNav dropdown"><a data-toggle="dropdown"
+						role="button" href="#" class="dropdown-toggle"><span>&nbsp;Users&nbsp;</span><b
+							class="caret"></b></a>
+					<ul class="dropdown-menu">
+							<li><a href="/dynamic/admin/users"> <i id="mUsers"
+									class="icon-ok topSubIcon hidden"></i><span>&nbsp;&nbsp;User
+										Management</span></a></li>
+						</ul></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div id="sidebar" class="span3">
+			<ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
+				<li class="leftNav"><a href="">Schema Management<i
+						class="icon-chevron-right"></i></a></li>
+				<li class="leftNav"><a href="">Script Engine<i
+						class="icon-chevron-right"></i></a></li>
+				<li class="leftNav"><a href="">Restful Api Management<i
+						class="icon-chevron-right"></i></a></li>
+				<li class="leftNav"><a href="">Verticle / Worker<i
+						class="icon-chevron-right"></i></a></li>
+				<li class="leftNav"><a href="">Message Addresses<i
+						class="icon-chevron-right"></i></a></li>
+				<li class="leftNav"><a href="">Handler Management<i
+						class="icon-chevron-right"></i></a></li>
+				<li class="leftNav"><a href="">Convertor<i
+						class="icon-chevron-right"></i></a></li>
+				<li class="leftNav"><a href="">Validator<i
+						class="icon-chevron-right"></i></a></li>
+				<li class="leftNav"><a href=""><span
+						class="badge badge-success pull-right">10</span><span>System
+							Status</span></a></li>
+				<li class="leftNav"><a href=""><span
+						class="badge badge-warning pull-right">10</span><span>Logs</span></a></li>
+				<li class="leftNav"><a href=""><span
+						class="badge badge-important pull-right">10</span><span>Errors</span></a></li>
+			</ul>
+		</div>
+		<div id="content" class="span9">
+			<div class="row-fluid">
+				<div class="block">
+					<div class="navbar navbar-inner block-header">
+						<ul class="breadcrumb">
+							<i class="icon-chevron-left hide-sidebar"><a href="#"
+								title="Hide Sidebar" rel="tooltip">&nbsp;</a></i>
+							<i style="display: none" class="icon-chevron-right show-sidebar"><a
+								href="#" title="Show Sidebar" rel="tooltip">&nbsp;</a></i>
+							<li><span>&nbsp;&nbsp;Security Information</span><span
+								class="divider">&nbsp;&gt;&nbsp;</span></li>
+							<li><a href="#">User Management</a></li>
+						</ul>
+					</div>
+					<div class="block-content collapse in">
+						<div class="span12">
+							<fieldset>
+								<legend>
+									<h3>
+										<i class="icon-th-list"></i><span>&nbsp;&nbsp;User
+											Management</span>
+									</h3>
+								</legend>
+							</fieldset>
+							<div class="table-toolbar">
+								<div class="btn-group">
+									<a href="#" onclick="showForm('/form')"><button
+											class="btn btn-success">
+											<i class="icon-plus icon-white"></i><span>&nbsp;&nbsp;Add
+												New</span>
+										</button></a><a href="#" style="margin-left: 5px;"><button class="btn">
+											<i class="icon-eye-open"></i><span>&nbsp;&nbsp;View</span>
+										</button></a><a href="#" style="margin-left: 5px;"><button
+											class="btn btn-inverse">
+											<i class="icon-refresh icon-white"></i><span>&nbsp;&nbsp;Update</span>
+										</button></a><a href="#" style="margin-left: 5px;"><button
+											class="btn btn-danger">
+											<i class="icon-remove icon-white"></i><span>&nbsp;&nbsp;Delete</span>
+										</button></a>
+								</div>
+							</div>
+							<table cellpadding="0" cellspacing="0" border="0" id="example2"
+								class="table table-striped table-bordered">
+								<thead>
+									<tr>
+										<th>Account ID</th>
+										<th>Email</th>
+										<th>Mobile</th>
+										<th>Status</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr class="odd gradeA">
+										<td>A</td>
+										<td>A</td>
+										<td>A</td>
+										<td>A</td>
+									</tr>
+									<tr class="even gradeA">
+										<td>B</td>
+										<td>B</td>
+										<td>B</td>
+										<td>B</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<hr>
+<footer>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;Coptyright &copy; 2015 Prayer
+		Development Team</p>
+</footer>
+<!-- ~ System Options ========================================-->
+<script type="text/javascript" src="/static/resources/js/options/h2.js"></script>
+<script type="text/javascript"
+	src="/static/resources/js/options/security.js"></script>
+<script type="text/javascript" src="/static/resources/js/admin/users.js"></script>
+</html>

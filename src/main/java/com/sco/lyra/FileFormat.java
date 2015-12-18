@@ -23,10 +23,15 @@ public class FileFormat {
 						"data/data.txt")), "UTF-8"))) {
 			String line = reader.readLine();
 			while (null != line) {
+				if(line.trim().equals("")){
+					content.append("\n");
+					line = reader.readLine();
+					continue;
+				}
 				// Ignore line comments;
-				// int space = getSpace(line);
-				content.append("\t" + line + "\n");
-				// content.append(getLine(line,space) + "\n");
+				int space = getSpace(line);
+				// content.append("\t" + line + "\n");
+				content.append(getLine(line,space) + "\n");
 				line = reader.readLine();
 			}
 		} catch (IOException ex) {
@@ -35,20 +40,19 @@ public class FileFormat {
 		System.out.println(content);
 	}
 
-	@SuppressWarnings("unused")
 	private static String getLine(final String line, final int space) {
 		System.out.println(space + ":" + line);
 		StringBuilder retLine = new StringBuilder();
 		switch (space) {
 		case 0:
-		case 4:
+		case 1:
 			retLine.append("\t").append(line.trim());
 			break;
-		case 1:
-		case 3:
+		case 2:
 		case 6:
 			retLine.append("\t\t").append(line.trim());
 			break;
+		case 4:
 		case 5:
 		case 8:
 			retLine.append("\t\t\t").append(line.trim());
@@ -72,7 +76,6 @@ public class FileFormat {
 		return retLine.toString();
 	}
 
-	@SuppressWarnings("unused")
 	private static int getSpace(final String line) {
 		int i = 0;
 		char space = '$';
